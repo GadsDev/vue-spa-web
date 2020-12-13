@@ -22,3 +22,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+yarn add --dev eslint-import-resolver-webpack eslint-plugin-import node-sass css-loader sass-loader
+yarn add tailwindcss

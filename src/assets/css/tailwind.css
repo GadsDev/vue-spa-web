@@ -1,0 +1,8 @@
+@tailwind "tailwindcss/base";
+
+a {
+    @apply text-gray-500;
+}
+
+@tailwind "tailwindcss/components";
+@tailwind "tailwindcss/utilities";
