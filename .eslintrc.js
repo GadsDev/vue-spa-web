@@ -1,14 +1,17 @@
 module.exports = {
     root: true,
     env: {
-        node: true
+        node: true,
     },
     parserOptions: {
-        parser: 'babel-eslint'
+        parser: 'babel-eslint',
     },
     settings: {
         'import/resolver': 'webpack',
     },
+    plugins: [
+        'vue'
+      ],
     extends: [
         'eslint:recommended',
         'plugin:vue/strongly-recommended',
@@ -20,7 +23,9 @@ module.exports = {
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'indent': 'off',
         'comma-dangle': ['error', 'always-multiline'],
+        'vue/valid-v-on': 'off',
         'semi': ['error', 'always'],
+        'quotes': ['error', 'single'],
         'space-before-function-paren': ['error', 'never'],
         'no-unused-vars': ['error', { 'args': 'after-used' }],
         'vue/html-indent': ['error', 4],
@@ -30,14 +35,15 @@ module.exports = {
             switchCase: 1,
         }],
         'vue/component-name-in-template-casing': ['error', 'PascalCase', {
+            'ignores': ['/^c1-/'],
             'registeredComponentsOnly': false,
         }],
         'vue/match-component-file-name': ['error', {
             'extensions': ['vue'],
-            'shouldMatchCase': false
+            'shouldMatchCase': false,
         }],
         'import/no-absolute-path': 'error',
         'import/newline-after-import': 'error',
-        'import/no-unresolved': ['error']
-    }
+        'import/no-unresolved': ['error'],
+    },
 };
