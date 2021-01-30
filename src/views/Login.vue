@@ -61,7 +61,7 @@
                 <button
                     type="submit"
                     :disabled="spinner.login"
-                    class="flex items-center justify-center bg-blue-800 text-blue-200 font-medium text-sm focus:outline-none rounded-sm py-3 px-4 block w-full appearance-none leading-normal"
+                    class="flex items-center justify-center bg-blue-800 text-blue-200 font-medium text-sm focus:outline-none rounded-sm py-3 px-4 w-full appearance-none leading-normal"
                 >
                     <img
                         v-if="spinner.login"
@@ -90,6 +90,7 @@
     import LoginMenu from '@/components/Auth/LoginMenu.vue';
     import Cookie from 'js-cookie';
     import { ValidationObserver, ValidationProvider } from 'vee-validate';
+    import message from '@/utils/messages.js';
 
     export default {
         name: 'Login',
@@ -122,11 +123,23 @@
                     password: this.password,
                 };
 
-                const response = await this.$axios.post('v1/login', payload);
-                const token = `${response.data.token_type} ${response.data.access_token}`;
-                Cookie.set('_todolist_token', token, { expires: 30});
+                this.resetResponse();
+                this.spinner.login = true;
 
-                this.$store.commit('user/STORE_USER', response.data.data);
+                try {
+                    const response = await this.$axios.post('v1/login', payload);
+                    const token = `${response.data.token_type} ${response.data.access_token}`;
+                    Cookie.set('_todolist_token', token, { expires: 30});
+
+                    this.$store.commit('user/STORE_USER', response.data.data);
+                } catch (e) {
+                    const errorCode = e?.response?.data?.error || 'ServerError';
+                    this.response.color = 'red';
+                    this.response.message = message[errorCode];
+                    this.spinner.login = false;
+
+                }
+
             },
 
             resetResponse() {
