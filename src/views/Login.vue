@@ -90,10 +90,9 @@
                     password: this.password,
                 };
 
-                await this.$axios.post('v1/login', payload);
-                // const response = await this.$axios.post('v1/login', payload);
-                // const token = `${response.data.token_type} ${response.data.access_token}`;
-                // Cookie.set('_todolist_token', token, { expires: 30})
+                const response = await this.$axios.post('v1/login', payload);
+                const token = `${response.data.token_type} ${response.data.access_token}`;
+                Cookie.set('_todolist_token', token, { expires: 30});
             },
 
             resetResponse() {
