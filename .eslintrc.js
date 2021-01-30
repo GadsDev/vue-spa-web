@@ -27,7 +27,7 @@ module.exports = {
         'semi': ['error', 'always'],
         'quotes': ['error', 'single'],
         'space-before-function-paren': ['error', 'never'],
-        'no-unused-vars': ['error', { 'args': 'after-used' }],
+        'no-unused-vars': ['warn', { 'args': 'after-used' }],
         'vue/html-indent': ['error', 4],
         'vue/no-v-html': 'off',
         'vue/script-indent': ['error', 4, {
