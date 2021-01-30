@@ -32,6 +32,7 @@
 
             <button
                 type="submit"
+                @click.stop.prevent="login()"
                 :disabled="spinner.login"
                 class="flex items-center justify-center bg-blue-800 text-blue-200 font-medium text-sm focus:outline-none rounded-sm py-3 px-4 block w-full appearance-none leading-normal"
             >
@@ -59,6 +60,7 @@
 
 <script>
     import LoginMenu from '../components/Auth/LoginMenu.vue';
+    import Cookie from 'js-cookie';
 
     export default {
         name: 'Login',
@@ -83,7 +85,15 @@
 
         methods: {
             async login() {
+                const payload = {
+                    email: this.email,
+                    password: this.password,
+                };
 
+                await this.$axios.post('v1/login', payload);
+                // const response = await this.$axios.post('v1/login', payload);
+                // const token = `${response.data.token_type} ${response.data.access_token}`;
+                // Cookie.set('_todolist_token', token, { expires: 30})
             },
 
             resetResponse() {
