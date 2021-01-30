@@ -93,6 +93,8 @@
                 const response = await this.$axios.post('v1/login', payload);
                 const token = `${response.data.token_type} ${response.data.access_token}`;
                 Cookie.set('_todolist_token', token, { expires: 30});
+
+                this.$store.commit('user/STORE_USER', response.data.data);
             },
 
             resetResponse() {
