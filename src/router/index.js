@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 
 import LayoutAuth from '../layouts/Auth.vue';
 import Login from '../views/Login.vue';
+import Register from '../views/Register.vue';
+import VerifyEmail from '@/views/VerifyEmail';
 
 Vue.use(VueRouter);
 
@@ -11,6 +13,18 @@ const routes = [
         path: '/login', component: LayoutAuth,
         children: [
             { path: '', name: 'login', component: Login },
+        ],
+    },
+    {
+        path: '/register', component: LayoutAuth,
+        children: [
+            { path: '', name: 'register', component: Register },
+        ],
+    },
+    {
+        path: '/verify-email', component: LayoutAuth,
+        children: [
+            { path: '', name: 'verifyEmail', component: VerifyEmail },
         ],
     },
 ];

@@ -117,7 +117,9 @@
 
         methods: {
             async login() {
-                if(!await this.$refs.loginForm.validate()) return false;
+                const validator = await this.$refs.loginForm.validate();
+                if (!validator) { return; }
+
                 const payload = {
                     email: this.email,
                     password: this.password,
@@ -137,7 +139,6 @@
                     this.response.color = 'red';
                     this.response.message = message[errorCode];
                     this.spinner.login = false;
-
                 }
 
             },
