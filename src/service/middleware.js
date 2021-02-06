@@ -1,5 +1,6 @@
 import Cookie from '@/service/cookie';
 import axios from 'axios';
+import store from '@/store';
 
 export default {
     async redirectIfNotAuthenticated(to, from, next) {
@@ -11,7 +12,9 @@ export default {
         }
 
         // Verificar se o token está valido
-        await axios.get('v1/me').catch(() => {
+        await axios.get('v1/me').then((response) => {
+            if (!store?.state?.user?.id) store.commit('user/STORE_USER', response.data.data);
+        }).catch(() => {
             Cookie.deleteToken();
             n = {name: 'login'};
         });
