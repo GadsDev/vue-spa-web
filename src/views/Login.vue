@@ -134,6 +134,7 @@
                     Cookie.setToken(token);
 
                     this.$store.commit('user/STORE_USER', response.data.data);
+                    this.$router.push({name: 'index'});
                 } catch (e) {
                     const errorCode = e?.response?.data?.error || 'ServerError';
                     this.response.color = 'red';
